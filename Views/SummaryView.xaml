@@ -1,0 +1,217 @@
+﻿<UserControl x:Class="MyPC.Views.SummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyPC.Views"
+             xmlns:cnv="clr-namespace:MyPC.Converters"
+             xmlns:models="clr-namespace:MyPC.Models"
+             xmlns:vm="clr-namespace:MyPC.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance vm:SummaryVM, IsDesignTimeCreatable=True}" 
+             d:DesignHeight="830" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cnv:BytesConverter x:Key="BytesConverter"/>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource Gradient2}">
+        <ScrollViewer Style="{StaticResource MaterialDesignScrollViewer}" Margin="5">
+            <StackPanel Margin="20">
+
+                <TextBlock Text="Система" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <StackPanel  Orientation="Horizontal" Margin="30 10" Background="#79586D">
+                    <StackPanel Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="Операційна система:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="Версія:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="{Binding SummaryInfo.OS.Name}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="{Binding SummaryInfo.OS.Version}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                       </StackPanel>
+                </StackPanel>
+
+
+
+                <TextBlock Text="Материнська плата" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <ListBox ItemsSource="{Binding SummaryInfo.Motherboards}" Background="#79586D" Margin="20 10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Motherboard}">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Виробник:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Продукт:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Серійний номер:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="10 0">
+                                    <TextBlock Text="{Binding Manufacturer}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding Product}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding SerialNumber}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Text="Процесор" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <ListBox ItemsSource="{Binding SummaryInfo.CPUs}" Background="#79586D" Margin="20 10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:CPU}">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Ім'я:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Сімейство:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Сокет:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Ядера:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Логічних ядера:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Частота:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="L1-кеш:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="L1-кеш:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="L3-кеш:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="10 0">
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding Caption}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding SocketDesignation}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding NumberOfCores}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding NumberOfLogicalProcessors}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding MaxClockSpeed, StringFormat={}{0} МГц}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding L1DataCacheSize, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding L2CacheSize, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding L3CacheSize, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                   </StackPanel>
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Text="Графіка" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <ListBox ItemsSource="{Binding SummaryInfo.VideoControllers}" Background="#79586D" Margin="20 10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:VideoController}">
+
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Ім'я:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Виробник:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Графічний процесор:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Відео-пам'ять:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                   </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="10 0">
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding Manufacturer}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding VideoProcessor}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding AdapterRAM, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    </StackPanel>
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                
+                <TextBlock Text="Диски" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <ListBox ItemsSource="{Binding SummaryInfo.Drives}" Background="#79586D" Margin="20 10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Drive}">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Модель:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Серійний номер:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Обсяг пам'яті:" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="Розділи" HorizontalAlignment="Right" Margin="20 10" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <ListBox Margin="0 10" ItemsSource="{Binding PartitionList}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type models:Partition}">
+                                                <TextBlock Text="{Binding Name}" Margin="20 0" HorizontalAlignment="Right" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="10 0">
+                                    <TextBlock Text="{Binding Model}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding SerialNumber}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="{Binding Size, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection }"  Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <TextBlock Text="" HorizontalAlignment="Right" Margin="0 10" Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                    <ListBox Margin="0 10" ItemsSource="{Binding PartitionList}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type models:Partition}">
+                                                <TextBlock Text="{Binding Size, Converter={StaticResource BytesConverter}}" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+
+                <TextBlock Text="Пам'ять" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <StackPanel  Orientation="Horizontal" Margin="30 10" Background="#79586D">
+                    <StackPanel Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="Загальний обсяг:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="Доступний обсяг:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="Віртуальний обсяг:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="Віртуальний доступний:"  Foreground="{StaticResource MaterialDesignSelection }" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="{Binding MemoryStatus.TotalPhysical, Converter={StaticResource BytesConverter}}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="{Binding MemoryStatus.AvailablePhysical, Converter={StaticResource BytesConverter}}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="{Binding MemoryStatus.TotalVirtual, Converter={StaticResource BytesConverter}}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        <TextBlock Text="{Binding MemoryStatus.AvailableVirtual, Converter={StaticResource BytesConverter}}"  Foreground="{StaticResource MaterialDesignSelection }" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                        </StackPanel>
+                </StackPanel>
+
+                <TextBlock Text="Монітор" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <StackPanel  Orientation="Horizontal" Margin="30 10" Background="#79586D">
+
+                    <ListBox ItemsSource="{Binding SummaryInfo.Monitors}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Monitor}">
+                                <TextBlock Text="Назва:" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <ListBox ItemsSource="{Binding SummaryInfo.Monitors}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Monitor}">
+                                <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>
+
+                <TextBlock Text="Мережа" Margin="40 0" Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Foreground="{StaticResource MaterialDesignSelection }"/>
+                <StackPanel  Orientation="Horizontal" Margin="30 10" Background="#79586D">
+
+                    <ListBox ItemsSource="{Binding SummaryInfo.Networks}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Monitor}">
+                                <TextBlock Text="Мережевий адаптер:" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <ListBox ItemsSource="{Binding SummaryInfo.Networks}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Monitor}">
+                                <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignSelection}" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>
+            </StackPanel>
+            
+            
+        </ScrollViewer>
+    </Grid>
+</UserControl>
